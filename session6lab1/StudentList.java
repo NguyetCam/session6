@@ -47,7 +47,7 @@ public class StudentList {
                     st.setBday(LocalDate.parse(sc.nextLine()));
                     System.out.println("Old address: " + st.getAddress() + ". New name: ");
                     st.setAddress(sc.nextLine());
-                    System.out.println("Old GPA: " + st.getGpa() + ". New name: ");
+                    System.out.format("Old GPA: %.2f. New GPA: ",st.getGpa());
                     st.setGpa(sc.nextFloat());
                     System.out.println("Student " + st.getName() + " has been edited");
                     return;
