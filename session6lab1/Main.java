@@ -21,11 +21,19 @@ public class Main {
             } while (x<0 || x>6);
             switch (x) {
                 case 1: {
-                    studentList.addStudent();
+                    try {
+                        studentList.addStudent();
+                    }catch (Exception e){
+                        System.out.println("Date of birth input error");
+                    }
                     break;
                 }
                 case 2: {
-                    studentList.editStudentbyID();
+                    try {
+                        studentList.editStudentbyID();
+                    }catch (Exception e){
+                        System.out.println("Date of birth input error");
+                    }
                     break;
                 }
                 case 3: {

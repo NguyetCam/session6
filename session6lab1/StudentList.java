@@ -41,19 +41,81 @@ public class StudentList {
             for (Student st : StudentList) {
                 if (id.equals(st.getId())) {
                     System.out.println("You are editing student: " + st.getName());
-                    System.out.println("Old name: " + st.getName() + ". New name: ");
-                    st.setName(sc.nextLine());
-                    System.out.println("Old DOB: " + st.getBday() + ". New DOB: ");
-                    st.setBday(LocalDate.parse(sc.nextLine()));
-                    System.out.println("Old address: " + st.getAddress() + ". New name: ");
-                    st.setAddress(sc.nextLine());
-                    System.out.println("Old GPA: " + st.getGpa() + ". New name: ");
-                    st.setGpa(sc.nextFloat());
-                    System.out.println("Student " + st.getName() + " has been edited");
+                    System.out.println("Date of birth: " + st.getBday());
+                    System.out.println("Address:  " + st.getAddress());
+                    System.out.println("GPA:  " + st.getGpa());
+                    System.out.println("Choose the field that you want to edit");
+                    System.out.println("1. Name\n2. Date of birth\n3. Address\n4. GPA\n5. Cancel");
+                    int x;
+                    do {
+                        x = sc.nextInt();
+                    }while (x<1 || x>5);
+                    switch (x){
+                        case 1:{
+                            System.out.println("Enter new name");
+                            editName(id);
+                            break;
+                        }
+                        case 2:{
+                            System.out.println("Enter new date of birth");
+                            editBday(id);
+                            break;
+                        }
+                        case 3:{
+                            System.out.println("Enter new address");
+                            editAddress(id);
+                            break;
+                        }
+                        case 4:{
+                            System.out.println("Enter new GPA");
+                            editGpa(id);
+                            break;
+                        }
+                        case 5:{
+                            System.out.println("Cancelled");
+                            return;
+                        }
+                    }
                     return;
                 }
             }
             System.out.println("ID " + id + " is not available");
+        }
+    }
+
+    public void editName(String id){
+        for(Student st:StudentList){
+            if(st.getId().equals(id)){
+                Scanner sc = new Scanner(System.in);
+                st.setName(sc.nextLine());
+            }
+        }
+    }
+
+    public void editBday(String id){
+        for(Student st:StudentList){
+            if(st.getId().equals(id)){
+                Scanner sc = new Scanner(System.in);
+                st.setBday(LocalDate.parse(sc.nextLine()));
+            }
+        }
+    }
+
+    public void editAddress(String id){
+        for(Student st:StudentList){
+            if(st.getId().equals(id)){
+                Scanner sc = new Scanner(System.in);
+                st.setAddress(sc.nextLine());
+            }
+        }
+    }
+
+    public void editGpa(String id){
+        for(Student st:StudentList){
+            if(st.getId().equals(id)){
+                Scanner sc = new Scanner(System.in);
+                st.setGpa(sc.nextFloat());
+            }
         }
     }
 
@@ -63,12 +125,20 @@ public class StudentList {
             System.out.println("Insert student's ID");
             Scanner sc = new Scanner(System.in);
             String id = sc.nextLine();
+            for(Student st:StudentList){
+                if(id.compareTo(st.getId())!=0){
+                    System.out.println("This ID is not available");
+                    return;
+                }
+            }
             StudentList.removeIf(st -> id.equals(st.getId()));
             System.out.println("Student ID " + id + " has been removed");
         }
     }
 
     public void sortStudentsbyGPA(){
+        //Cách Cường
+//        StudentList.sort(Comparator.comparing(Student::getGpa));
         String idtemp,nametemp,addresstemp;
         LocalDate bdaytemp;
         double gpatemp;
@@ -110,6 +180,8 @@ public class StudentList {
                 return o1.getName().compareTo(o2.getName());
             }
         });
+        //Cách Cường:
+//        StudentList.sort(Comparator.comparing(Student::getName));
         System.out.println("Sort students by name");
         System.out.println("| ID |   Student's name   | Date of birth |     Address     | GPA |");
         for (Student st:StudentList) {
